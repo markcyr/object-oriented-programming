@@ -26,17 +26,18 @@ class BankAccount
 #    @balance = intrest + @balance
 #  end
 
-  def create
-    acc = BankAccount.new()
-    @@accounts = (acc)
+  def self.create
+    acc = BankAccount.new
+    @@accounts << acc
+    return acc
   end
 
   def total_funds
     @@accounts.each { |a| sum+=a }
   end
 
-  def intrest_time
-    @@accounts.each { |a| (a * @@intrest_rate) }
+  def self.intrest_time
+    @@accounts.each { |a| (a.balance = * @@intrest_rate) }
 
   end
 
