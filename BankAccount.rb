@@ -1,9 +1,12 @@
 class BankAccount
 
-  attr_accessor :deposit, :balance, :withdraw , :put_balance , :amount, :new_amount, :gain_interest
+  attr_accessor :balance
 
-  def initialize(amount)
-    @balance = amount
+  @@intrest_rate = 0.01
+  @@accounts = []
+
+  def initialize
+    @balance = 0
   end
 
   def put_balance
@@ -18,9 +21,23 @@ class BankAccount
     @balance = @balance - new_amount
   end
 
-  def gain_interest
-    intrest = 0.025 * @balance
-    @balance = intrest + @balance
+#  def gain_interest
+#    intrest = 0.025 * @balance
+#    @balance = intrest + @balance
+#  end
+
+  def create
+    acc = BankAccount.new()
+    @@accounts = (acc)
   end
 
+  def total_funds
+    @@accounts.each { |a| sum+=a }
   end
+
+  def intrest_time
+    @@accounts.each { |a| (a * @@intrest_rate) }
+
+  end
+
+end
