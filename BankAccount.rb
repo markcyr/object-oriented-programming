@@ -3,7 +3,7 @@ class BankAccount
   attr_accessor :balance
 
   @@intrest_rate = 0.01
-  @@accounts = []
+  @@accounts = [ ]
 
   def initialize
     @balance = 0
@@ -38,7 +38,10 @@ class BankAccount
 
   def self.intrest_time
     @@accounts.each { |a| (a.balance = * @@intrest_rate) }
+  end
 
+  def self.report
+    @@accounts
   end
 
 end
