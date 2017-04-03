@@ -3,7 +3,7 @@ class Book
   @@on_shelf = []
   @@on_loan = []
 
-  attr_accessor :due_date
+  attr_accessor :due_date, :title
 
 # This instance method makes a new book object. It should initialize a book's title, author, and isbn.
   def initialize(title,author,isbn)
@@ -75,9 +75,9 @@ class Book
   def self.overdue
     @@on_loan.each  do |a|
       if a.due_date < Time.now
-     puts  " There is a book over due"
+     print a.title, " is over due"
       else
-      puts  @title
+      print a.title, " is not over due"
       end
     end
   end
