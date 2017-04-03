@@ -7,6 +7,7 @@ class BankAccount
 
   def initialize
     @balance = 0
+    @name = " "
   end
 
   def put_balance
@@ -26,7 +27,8 @@ class BankAccount
 #    @balance = intrest + @balance
 #  end
 
-  def self.create
+  def self.create(name)
+    @name = name
     acc = BankAccount.new
     @@accounts << acc
     return acc
@@ -45,3 +47,5 @@ class BankAccount
   end
 
 end
+
+ BankAccount.create

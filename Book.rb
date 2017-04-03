@@ -10,7 +10,7 @@ class Book
     @title = title
     @author = author
     @isbn = isbn.to_i
-    @borrow = false
+#    @borrow = false
   end
 
 #   def return_to_library
@@ -38,29 +38,78 @@ class Book
   def self.browse
   #     item = @@on_shelf.sample
   #     puts item
-  @@on_shelf.sample
+    @@on_shelf.sample
   end
 
-   def lent_out?
-     @@_loan.each_index do |isbn|
-     if isbn == true
-       "Book is checked out"
-     else
-       "Go grab the book"
-   end
+
+  def lent_out?
+    @@on_loan.include?(self)
+  end
+
+
+  def self.current_due_date
+      puts "Book singed out today should be retured #{Time.now + 604800}"
+  end
+  # end
+
+  def borrow
+    if lent_out? == false
+      @@on_loan << (self)
+      @@on_shelf.delete(self)
+#      @due_date = Time.now
+      @due_date = (Time.now + 604800)
+    else
+      puts "#{@title} is signed out"
+    end
+  end
+
+  def return
+    if lent_out? == true
+      @@on_shelf << (self)
+      @@on_loan.delete(self)
+    else
+      puts "Book has not been checked out"
+    end
+  end
+
+  def self.overdue
+    @@on_loan.each  do |a|
+      if a.due_date < Time.now
+     puts  " There is a book over due"
+      else
+      puts  @title
+      end
+    end
+  end
+
+end
+
+  # def self.test
+  #     @@on_shelf.include?(self)
+  #     end
+  # end
+  # def lent_out? (isbn)
+  #    @@on_shelf.each_index do |isbn|
+  #      if isbn == true
+  #        "Book is checked out"
+  #      else
+  #        "Go grab the book"
+  #      end
+  #   end
+  #  end
 #   def self.current_due_date
 #
 #   end
 
-end
 
 
-book1 = Book.create("book1","sam",1)
-book2 = Book.create("book2","sam",2)
-book3 = Book.create("book3","sam",3)
-book4 = Book.create("book4","sam",4)
-book5 = Book.create("book5","sam",5)
 
+Cops1 = Book.create("cops1","cop",1);
+Cooks2 = Book.create("cooks2","cook",2);
+Bakers3 = Book.create("bakers3","baker",3);
+Bankers4 = Book.create("bankers4","banker",4);
+Candle5 = Book.create("candle5","candle",5);
+Are_youthere = Book.create("arethere","god",6);
 
 #This instance method is how a book is taken out of the library.
 #This method should use lent_out? to check if the book is already on loan,
